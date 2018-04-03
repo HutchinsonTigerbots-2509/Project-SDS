@@ -7,6 +7,9 @@
 
 package org.usfirst.frc.team2509.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.VictorSP;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -14,13 +17,31 @@ package org.usfirst.frc.team2509.robot;
  * floating around.
  */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
+	public static VictorSP DriveTrain_LeftFrontDrive;
+	public static VictorSP DriveTrain_RightFrontDrive;
+	public static VictorSP DriveTrain_LeftRearDrive;
+	public static VictorSP DriveTrain_RightRearDrive;
+	public static VictorSP DriveTrain_LeftFrontRotate;
+	public static VictorSP DriveTrain_RightFrontRotate;
+	public static VictorSP DriveTrain_LeftRearRotate;
+	public static VictorSP DriveTrain_RightRearRotate;
+	public static Encoder DriveTrain_LeftFrontEncoder;
+	public static Encoder DriveTrain_RightFrontEncoder;
+	public static Encoder DriveTrain_LeftRearEncoder;
+	public static Encoder DriveTrain_RightRearEncoder;
+	
+	public static void init() {
+		DriveTrain_LeftFrontDrive = new VictorSP(0);
+		DriveTrain_LeftFrontRotate = new VictorSP(1);
+		DriveTrain_RightFrontDrive = new VictorSP(2);
+		DriveTrain_RightFrontRotate = new VictorSP(3);
+		DriveTrain_LeftRearDrive = new VictorSP(4);
+		DriveTrain_LeftRearRotate = new VictorSP(5);
+		DriveTrain_RightRearDrive = new VictorSP(6);
+		DriveTrain_RightRearRotate = new VictorSP(7);
+		DriveTrain_LeftFrontEncoder = new Encoder(0,1);
+		DriveTrain_RightFrontEncoder = new Encoder(2,3);
+		DriveTrain_LeftRearEncoder = new Encoder(4,5);
+		DriveTrain_RightRearEncoder = new Encoder(6,7);
+	}
 }
