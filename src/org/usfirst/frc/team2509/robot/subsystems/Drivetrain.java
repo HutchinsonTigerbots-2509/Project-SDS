@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -29,19 +30,26 @@ public class Drivetrain extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
     public double calculateRotateAngle(double x, double y) {
-    	double a = x;
-    	double b = y;
-    	double c = Math.sqrt((a*a)+(b*b));
+    	double a = x;//X value
+    	double b = y;//Y value
+    	double c = Math.sqrt((a*a)+(b*b));//Hypotenuse from (0,0) to (x,y)
     	double angle = Math.atan2(y, x)*(180/Math.PI);
+		SmartDashboard.putNumber("A", a);
+		SmartDashboard.putNumber("B", b);
+		SmartDashboard.putNumber("C", c);
+		SmartDashboard.putNumber("Drive Angle", angle);
 		return angle;
     }
+    
     public void rotateToAngle(double angle) {
     	rotateMotor(LeftFrontRotate,LeftFrontEnc,angle);
     	rotateMotor(RightFrontRotate,RightFrontEnc,angle);
     	rotateMotor(LeftRearRotate,LeftRearEnc,angle);
     	rotateMotor(RightRearRotate,RightRearEnc,angle);
     }
+    
     public void rotateMotor(SpeedController motor, Encoder enc, double angle) {
     	if(angle<(enc.get()-rangeOfError)){
     		motor.set(-0.5);
@@ -51,6 +59,7 @@ public class Drivetrain extends Subsystem {
     		motor.set(0);
     	}
     }
+    
     /**
      * Left Front Drive Motor
      * @return VictorSP LeftFront
