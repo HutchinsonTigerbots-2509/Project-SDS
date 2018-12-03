@@ -9,7 +9,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
     rlSwerve,
     rrSwerve;
   private SwerveDrive drivetrain;
+  private Joystick stick;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -72,6 +74,8 @@ public class Robot extends IterativeRobot {
     rrSwerve = new Swerve(rrdMotor,rrrMotor,rrdEnc,rrrEnc);
     //Drivetrain
     drivetrain = new SwerveDrive(flSwerve,frSwerve,rlSwerve,rrSwerve);
+    //Joysticks
+    stick = new Joystick(0);
   }
 
   /**
@@ -113,6 +117,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
+    drivetrain.Drive(stick.getX(), stick.getY(), stick.getZ());
   }
 
   /**

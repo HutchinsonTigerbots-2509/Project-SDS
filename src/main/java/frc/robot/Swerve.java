@@ -19,9 +19,7 @@ public class Swerve {
 		RotateMotor;
 	private static Encoder DriveEncoder,
 		RotateEncoder;
-	protected Swerve(){
-
-	}
+	protected Swerve(){}
 	public Swerve(SpeedController drvMtr, SpeedController rotMtr, Encoder drvEnc, Encoder rotEnc){
 		DriveMotor = drvMtr;
 		DriveEncoder = drvEnc;
