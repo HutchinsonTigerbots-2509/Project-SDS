@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.*;
 
 /**
@@ -20,71 +17,61 @@ import edu.wpi.first.wpilibj.*;
  * project.
  */
 public class Robot extends IterativeRobot {
-  private Talon fldMotor,
-    frdMotor,
-    rldMotor,
-    rrdMotor,
-    flrMotor,
-    frrMotor,
-    rlrMotor,
-    rrrMotor;
-  private Encoder fldEnc,
-    frdEnc,
-    rldEnc,
-    rrdEnc,
-    flrEnc,
-    frrEnc,
-    rlrEnc,
-    rrrEnc;
-  private Swerve flSwerve,
-    frSwerve,
-    rlSwerve,
-    rrSwerve;
+  private Talon fldMotor, frdMotor, rldMotor, rrdMotor, flrMotor, frrMotor, rlrMotor, rrrMotor;
+  private Encoder fldEnc, frdEnc, rldEnc, rrdEnc, flrEnc, frrEnc, rlrEnc, rrrEnc;
+  private Swerve flSwerve, frSwerve, rlSwerve, rrSwerve;
   private SwerveDrive drivetrain;
   private Joystick stick;
+  public Swerve test;
 
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
-    //Motors for Swerve Drive
-    fldMotor = new Talon(0);
-    frdMotor = new Talon(1);
-    rldMotor = new Talon(2);
-    rrdMotor = new Talon(3);
-    flrMotor = new Talon(4);
-    frrMotor = new Talon(5);
-    rlrMotor = new Talon(6);
-    rrrMotor = new Talon(7);
-    //Encoders for Sweve Drive
-    fldEnc = new Encoder(0,1);
-    frdEnc = new Encoder(2,3);
-    rldEnc = new Encoder(4,5);
-    rrdEnc = new Encoder(6,7);
-    flrEnc = new Encoder(8,9);
-    frrEnc = new Encoder(10,11);
-    rlrEnc = new Encoder(12,13);
-    rrrEnc = new Encoder(14,15);
-    //Swerve Drive
-    flSwerve = new Swerve(fldMotor, flrMotor, fldEnc, flrEnc);
-    frSwerve = new Swerve(frdMotor,frrMotor,frdEnc,frrEnc);
-    rlSwerve = new Swerve(rldMotor,rlrMotor,rldEnc,rlrEnc);
-    rrSwerve = new Swerve(rrdMotor,rrrMotor,rrdEnc,rrrEnc);
-    //Drivetrain
-    drivetrain = new SwerveDrive(flSwerve,frSwerve,rlSwerve,rrSwerve);
-    //Joysticks
+    VictorSP testRMotor = new VictorSP(0);
+    VictorSP testDMotor = new VictorSP(1);
+    Encoder testREncoder = new Encoder(0, 1);
+    Encoder testDEncoder = new Encoder(2, 3);
+    test = new Swerve(testDMotor, testRMotor, testDEncoder, testREncoder);
+    // //Motors for Swerve Drive
+    // fldMotor = new Talon(0);
+    // frdMotor = new Talon(1);
+    // rldMotor = new Talon(2);
+    // rrdMotor = new Talon(3);
+    // flrMotor = new Talon(4);
+    // frrMotor = new Talon(5);
+    // rlrMotor = new Talon(6);
+    // rrrMotor = new Talon(7);
+    // //Encoders for Sweve Drive
+    // fldEnc = new Encoder(0,1);
+    // frdEnc = new Encoder(2,3);
+    // rldEnc = new Encoder(4,5);
+    // rrdEnc = new Encoder(6,7);
+    // flrEnc = new Encoder(8,9);
+    // frrEnc = new Encoder(10,11);
+    // rlrEnc = new Encoder(12,13);
+    // rrrEnc = new Encoder(14,15);
+    // //Swerve Drive
+    // flSwerve = new Swerve(fldMotor, flrMotor, fldEnc, flrEnc);
+    // frSwerve = new Swerve(frdMotor,frrMotor,frdEnc,frrEnc);
+    // rlSwerve = new Swerve(rldMotor,rlrMotor,rldEnc,rlrEnc);
+    // rrSwerve = new Swerve(rrdMotor,rrrMotor,rrdEnc,rrrEnc);
+    // //Drivetrain
+    // drivetrain = new SwerveDrive(flSwerve,frSwerve,rlSwerve,rrSwerve);
+    // Joysticks
     stick = new Joystick(0);
   }
 
   /**
-   * This function is called every robot packet, no matter the mode. Use
-   * this for items like diagnostics that you want ran during disabled,
-   * autonomous, teleoperated and test.
+   * This function is called every robot packet, no matter the mode. Use this for
+   * items like diagnostics that you want ran during disabled, autonomous,
+   * teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
@@ -92,14 +79,15 @@ public class Robot extends IterativeRobot {
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
-   * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
-   * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-   * getString line to get the auto name from the text box below the Gyro
+   * between different autonomous modes using the dashboard. The sendable chooser
+   * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+   * remove all of the chooser code and uncomment the getString line to get the
+   * auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional comparisons to
-   * the switch structure below with additional strings. If using the
-   * SendableChooser make sure to add them to the chooser code above as well.
+   * <p>
+   * You can add additional auto modes by adding additional comparisons to the
+   * switch structure below with additional strings. If using the SendableChooser
+   * make sure to add them to the chooser code above as well.
    */
   @Override
   public void autonomousInit() {
@@ -117,7 +105,8 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    drivetrain.Drive(stick.getX(), stick.getY(), stick.getZ());
+    test.SingleDrive(stick.getX(), stick.getY(), stick.getZ());
+    // drivetrain.Drive(stick.getX(), stick.getY(), stick.getZ());
   }
 
   /**
