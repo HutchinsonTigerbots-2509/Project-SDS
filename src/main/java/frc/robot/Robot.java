@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +22,12 @@ public class Robot extends IterativeRobot {
   private Encoder fldEnc, frdEnc, rldEnc, rrdEnc, flrEnc, frrEnc, rlrEnc, rrrEnc;
   private Swerve flSwerve, frSwerve, rlSwerve, rrSwerve;
   private SwerveDrive drivetrain;
+  VictorSP testRMotor = new VictorSP(0);
+  VictorSP testDMotor = new VictorSP(1);
+  // testDMotor.setInverted(true);
+  Encoder testREncoder = new Encoder(0, 1);
+
+  Encoder testDEncoder = new Encoder(2, 3);
   private Joystick stick;
   public Swerve test;
 
@@ -30,10 +37,6 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void robotInit() {
-    VictorSP testRMotor = new VictorSP(0);
-    VictorSP testDMotor = new VictorSP(1);
-    Encoder testREncoder = new Encoder(0, 1);
-    Encoder testDEncoder = new Encoder(2, 3);
     test = new Swerve(testDMotor, testRMotor, testDEncoder, testREncoder);
     // //Motors for Swerve Drive
     // fldMotor = new Talon(0);
@@ -98,6 +101,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    SmartDashboard.putNumber("Gyro", testREncoder.get());
   }
 
   /**
