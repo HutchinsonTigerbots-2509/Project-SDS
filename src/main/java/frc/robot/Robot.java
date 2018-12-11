@@ -109,7 +109,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
-    test.SingleDrive(stick.getX(), stick.getY(), stick.getZ());
+    test.SingleDrive(stick.getX(), -stick.getY(), stick.getZ());
     // drivetrain.Drive(stick.getX(), stick.getY(), stick.getZ());
   }
 

@@ -27,6 +27,8 @@ public class Swerve {
 		DriveEncoder = drvEnc;
 		RotateMotor = rotMtr;
 		RotateEncoder = rotEnc;
+		DriveEncoder.setDistancePerPulse(1.40625 * (52 / 54));
+
 	}
 
 	/**
@@ -42,6 +44,10 @@ public class Swerve {
 	 */
 	public static int RotateAngle(double x, double y) {
 		// (x,y) or (cos,sin)
+		if (Math.abs(x) < 0.05)
+			x = 0;
+		if (Math.abs(y) < 0.05)
+			y = 0;
 		double rads = 0, degs = 0;
 		rads = Math.atan2(x, y);
 		degs = Math.toDegrees(rads);
@@ -50,6 +56,7 @@ public class Swerve {
 		// if(degs<0){
 		// degs+=360;
 		// }
+
 		SmartDashboard.putNumber("RotAngle", degs);
 		return (int) degs;
 	}
@@ -78,12 +85,13 @@ public class Swerve {
 		int target = targetAngle;
 		int tollerance = 5; // ± degrees
 		int angle = RotateEncoder.get();
-		if (angle > (target - 5)) {
+		angle = (angle * 34 / 72);
+		if (angle > (target + tollerance)) {
 			SmartDashboard.putString("Turn", "Left");
-			RotateMotor.set(-0.5);
-		} else if (angle < (target + 5)) {
-			SmartDashboard.putString("Turn", "Right");
 			RotateMotor.set(0.5);
+		} else if (angle < (target - tollerance)) {
+			SmartDashboard.putString("Turn", "Right");
+			RotateMotor.set(-0.5);
 		} else {
 			SmartDashboard.putString("Turn", "Stop");
 			RotateMotor.set(0);
@@ -100,6 +108,11 @@ public class Swerve {
 		return DriveEncoder.getDistance();
 	}
 
+	public double getRPM() {
+		return DriveEncoder.getRate();
+
+	}
+
 	public void SingleDrive(double x, double y, double zRotation) {
 		x = limit(x);
 		y = limit(y);
@@ -114,6 +127,9 @@ public class Swerve {
 		// } else {
 		// RotateMotor.set(0);
 		// }
+		SmartDashboard.putNumber("Gyro", RotateEncoder.get());
+		SmartDashboard.putNumber("RPM-Raw", DriveEncoder.getDistance());
+		SmartDashboard.putNumber("RPM", DriveEncoder.getRate());
 		Rotate(rotateAngle);
 		Drive(y);
 	}
